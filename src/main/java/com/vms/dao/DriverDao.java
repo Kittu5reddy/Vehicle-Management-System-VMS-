@@ -11,6 +11,8 @@ public interface DriverDao {
     Driver findById(Integer id);
 
     List<Driver> findAll();
+    List<Driver> findAllAvailableDrivers();
+
 
     void update(Driver driver);
 

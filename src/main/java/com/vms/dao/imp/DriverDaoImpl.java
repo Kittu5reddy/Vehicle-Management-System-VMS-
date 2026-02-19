@@ -23,6 +23,21 @@ public class DriverDaoImpl implements DriverDao {
         }
     }
 
+
+
+    @Override
+    public List<Driver> findAllAvailableDrivers() {
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            return session.createQuery(
+                    "FROM Driver d WHERE d.available = true",
+                    Driver.class
+            ).list();
+        }
+    }
+
+
     @Override
     public Driver findById(Integer id) {
 

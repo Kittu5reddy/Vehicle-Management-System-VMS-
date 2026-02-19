@@ -1,6 +1,7 @@
 package com.vms.model;
 
 import com.vms.enums.Gender;
+import com.vms.enums.Role;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,10 @@ public abstract class User {
 
     @Column(nullable = false)
     private String userName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @Column(nullable = false)
     private LocalDateTime dateOfBirth;
@@ -146,4 +151,12 @@ public abstract class User {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }
