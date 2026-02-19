@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "https://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- ===================== -->
+        <!-- DATABASE CONNECTION   -->
+        <!-- ===================== -->
+
+        <property name="hibernate.connection.driver_class">
+            com.mysql.cj.jdbc.Driver
+        </property>
+
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/vms_db?serverTimezone=UTC
+        </property>
+
+        <property name="hibernate.connection.username">
+            root
+        </property>
+
+        <property name="hibernate.connection.password">
+            kaushik
+        </property>
+
+        <!-- ===================== -->
+        <!-- DIALECT (OPTIONAL H6) -->
+        <!-- ===================== -->
+
+        <!-- Hibernate 6 auto-detects dialect -->
+        <!-- <property name="hibernate.dialect">
+            org.hibernate.dialect.MySQLDialect
+        </property> -->
+
+        <!-- ===================== -->
+        <!-- SCHEMA AUTO UPDATE    -->
+        <!-- ===================== -->
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- ===================== -->
+        <!-- SQL LOGGING           -->
+        <!-- ===================== -->
+
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+        <property name="hibernate.highlight_sql">true</property>
+
+        <!-- ===================== -->
+        <!-- NAMING STRATEGY       -->
+        <!-- ===================== -->
+
+        <property name="hibernate.physical_naming_strategy">
+            org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        </property>
+
+        <property name="hibernate.implicit_naming_strategy">
+            org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+        </property>
+
+        <!-- ===================== -->
+        <!-- PERFORMANCE SETTINGS  -->
+        <!-- ===================== -->
+
+        <property name="hibernate.connection.pool_size">10</property>
+        <property name="hibernate.jdbc.batch_size">20</property>
+
+        <!-- ===================== -->
+        <!-- ENTITY MAPPING        -->
+        <!-- (Optional if using addAnnotatedClass in Java) -->
+        <!-- ===================== -->
+
+        <!--
+        <mapping class="com.vms.model.Vehicle"/>
+        <mapping class="com.vms.model.Car"/>
+        <mapping class="com.vms.model.Bus"/>
+        <mapping class="com.vms.model.Truck"/>
+        <mapping class="com.vms.model.User"/>
+        <mapping class="com.vms.model.Driver"/>
+        <mapping class="com.vms.model.Manager"/>
+        <mapping class="com.vms.model.Maintenance"/>
+        <mapping class="com.vms.model.Trip"/>
+        -->
+
+    </session-factory>
+
+</hibernate-configuration>

@@ -4,16 +4,34 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "car")
+@Table(name = "cars")
 public class Car extends Vehicle {
 
-    private int doors;
+    private Integer numberOfDoors;
+    private Float bootSpace;
+    private Boolean hasAC;
 
-    public int getDoors() {
-        return doors;
+    public Integer getNumberOfDoors() {
+        return numberOfDoors;
     }
 
-    public void setDoors(int doors) {
-        this.doors = doors;
+    public void setNumberOfDoors(Integer numberOfDoors) {
+        this.numberOfDoors = numberOfDoors;
+    }
+
+    public Float getBootSpace() {
+        return bootSpace;
+    }
+
+    public void setBootSpace(Float bootSpace) {
+        this.bootSpace = bootSpace;
+    }
+
+    public Boolean getHasAC() {
+        return hasAC;
+    }
+
+    public void setHasAC(Boolean hasAC) {
+        this.hasAC = hasAC;
     }
 }

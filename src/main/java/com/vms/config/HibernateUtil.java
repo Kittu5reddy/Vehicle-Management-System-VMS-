@@ -1,8 +1,8 @@
 package com.vms.config;
 
+import com.vms.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import com.vms.model.*;
 public class HibernateUtil {
 
     private static final SessionFactory sessionFactory;
@@ -13,6 +13,12 @@ public class HibernateUtil {
                 .addAnnotatedClass(Vehicle.class)
                 .addAnnotatedClass(Car.class)
                 .addAnnotatedClass(Bus.class)
+                .addAnnotatedClass(Truck.class)
+                .addAnnotatedClass(User.class)
+                .addAnnotatedClass(Driver.class)
+                .addAnnotatedClass(Manager.class)
+                .addAnnotatedClass(Maintenance.class)
+                .addAnnotatedClass(Trip.class)
                 .buildSessionFactory();
     }
 
