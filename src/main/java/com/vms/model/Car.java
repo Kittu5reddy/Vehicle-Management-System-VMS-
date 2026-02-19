@@ -10,7 +10,9 @@ public class Car extends Vehicle {
     private Integer numberOfDoors;
     private Float bootSpace;
     private Boolean hasAC;
-
+    public String toString() {
+        return "Car " + super.getRegistrationNumber();
+    }
     public Integer getNumberOfDoors() {
         return numberOfDoors;
     }

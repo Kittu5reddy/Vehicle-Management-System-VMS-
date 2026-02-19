@@ -13,7 +13,9 @@ public class Bus extends Vehicle {
 
     @Column(unique = true)
     private String busNumber;
-
+    public String toString() {
+        return "Bus " + super.getRegistrationNumber();
+    }
     public Integer getSeatingCapacity() {
         return seatingCapacity;
     }

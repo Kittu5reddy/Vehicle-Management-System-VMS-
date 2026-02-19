@@ -20,19 +20,19 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    @Override
     public User findByUserName(String userName) {
 
         try (Session session =
                      HibernateUtil.getSessionFactory().openSession()) {
 
+
             return session.createQuery(
-                            "FROM User u WHERE u.userName = :username",
-                            User.class)
+                            "FROM User WHERE userName = :username", User.class)
                     .setParameter("username", userName)
                     .uniqueResult();
         }
     }
+
 
     @Override
     public List<User> findAll() {

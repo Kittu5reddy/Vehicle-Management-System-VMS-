@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "vehicles")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Vehicle {
+public  class Vehicle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +46,8 @@ public abstract class Vehicle {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
+
+
 
     public Integer getId() {
         return id;

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "managers")
 public class Manager extends User {
 
+
     @Column(nullable = false)
     private Float salary;
 

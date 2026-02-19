@@ -29,12 +29,27 @@ public class MaintenanceDaoImpl implements MaintenanceDao {
         }
     }
 
-    public List<Maintenance> findAll(){
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return session.createQuery("from Maintenance",Maintenance.class).list();
-        }
+    @Override
+    public List<Maintenance> findAll() {
+
+        Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession();
+
+        List<Maintenance> list = session.createQuery(
+                """
+                SELECT m FROM Maintenance m
+                LEFT JOIN FETCH m.vehicle
+                """,
+                Maintenance.class
+        ).getResultList();
+
+        session.close();
+
+        return list;
     }
+
 
     public void update(Maintenance maintenance){
 

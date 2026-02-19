@@ -9,43 +9,91 @@ import java.util.List;
 
 import static com.vms.config.HibernateUtil.getSessionFactory;
 
-
 public class BusDaoImpl implements BusDao {
 
-    public void save(Bus bus){
-        try(Session session=getSessionFactory().openSession()){
-            Transaction tx=session.beginTransaction();
+    @Override
+    public void save(Bus bus) {
+
+        Transaction tx = null;
+
+        try (Session session = getSessionFactory().openSession()) {
+
+            tx = session.beginTransaction();
+
             session.persist(bus);
+
             tx.commit();
+
+        } catch (Exception e) {
+
+            if (tx != null) tx.rollback();
+
+            e.printStackTrace();
         }
     }
 
-    public Bus findById(Integer id){
-        try(Session session=getSessionFactory().openSession()){
-            return session.get(Bus.class,id);
+    @Override
+    public List<Bus> findAll() {
+
+        try (Session session = getSessionFactory().openSession()) {
+
+            return session.createQuery("FROM Bus", Bus.class)
+                    .getResultList();
         }
     }
 
-    public List<Bus> findAll(){
-        try(Session session=getSessionFactory().openSession()){
-            return session.createQuery("from Bus",Bus.class).list();
+    @Override
+    public Bus findById(Integer id) {
+
+        try (Session session = getSessionFactory().openSession()) {
+
+            return session.get(Bus.class, id);
         }
     }
 
-    public void update(Bus bus){
-        try(Session session=getSessionFactory().openSession()){
-            Transaction tx=session.beginTransaction();
+    @Override
+    public void update(Bus bus) {
+
+        Transaction tx = null;
+
+        try (Session session = getSessionFactory().openSession()) {
+
+            tx = session.beginTransaction();
+
             session.merge(bus);
+
             tx.commit();
+
+        } catch (Exception e) {
+
+            if (tx != null) tx.rollback();
+
+            e.printStackTrace();
         }
     }
 
-    public void delete(Integer id){
-        try(Session session=getSessionFactory().openSession()){
-            Transaction tx=session.beginTransaction();
-            Bus bus=session.get(Bus.class,id);
-            if(bus!=null) session.remove(bus);
+    @Override
+    public void delete(Integer id) {
+
+        Transaction tx = null;
+
+        try (Session session = getSessionFactory().openSession()) {
+
+            tx = session.beginTransaction();
+
+            Bus bus = session.get(Bus.class, id);
+
+            if (bus != null) {
+                session.remove(bus);
+            }
+
             tx.commit();
+
+        } catch (Exception e) {
+
+            if (tx != null) tx.rollback();
+
+            e.printStackTrace();
         }
     }
 }

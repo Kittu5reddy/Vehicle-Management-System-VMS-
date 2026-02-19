@@ -1,11 +1,8 @@
 package com.vms.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.*;
-import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import com.vms.enums.TruckType;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "trucks")
@@ -24,7 +21,10 @@ public class Truck extends Vehicle {
 
     public Truck() {}
 
-
+    @Override
+    public String toString() {
+        return "Truck " + super.getRegistrationNumber();
+    }
 
     public Float getLoadCapacity() {
         return loadCapacity;

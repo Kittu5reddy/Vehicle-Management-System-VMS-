@@ -9,7 +9,21 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class VehicleDaoImpl implements VehicleDao {
+    public void save(Vehicle vehicle){
+        try(Session session=HibernateUtil.getSessionFactory().openSession()){
+            Transaction tx=session.beginTransaction();
+            session.persist(vehicle);
+            tx.commit();
+        }
+    }
 
+    public void update(Vehicle vehicle){
+        try(Session session=HibernateUtil.getSessionFactory().openSession()){
+            Transaction tx=session.beginTransaction();
+            session.merge(vehicle);
+            tx.commit();
+        }
+    }
     @Override
     public Vehicle findById(Integer id) {
 

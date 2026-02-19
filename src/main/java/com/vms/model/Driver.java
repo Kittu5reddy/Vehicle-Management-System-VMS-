@@ -13,6 +13,11 @@ public class Driver extends User {
     @Column(nullable = false, unique = true)
     private String licenseNumber;
 
+    @Override
+    public String toString() {
+
+        return super.getFullName()+" "+rating ;
+    }
 
     @Column(nullable = false)
     private Float rating;

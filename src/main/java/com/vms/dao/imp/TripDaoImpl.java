@@ -29,10 +29,21 @@ public class TripDaoImpl implements TripDao {
         }
     }
 
-    public List<Trip> findAll(){
+    @Override
+    public List<Trip> findAll() {
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            return session.createQuery("from Trip",Trip.class).list();
+        try (Session session = HibernateUtil
+                .getSessionFactory()
+                .openSession()) {
+
+            return session.createQuery(
+                    """
+                    SELECT t FROM Trip t
+                    LEFT JOIN FETCH t.driver
+                    LEFT JOIN FETCH t.vehicle
+                    """,
+                    Trip.class
+            ).getResultList();
         }
     }
 
