@@ -1,4 +1,14 @@
 package com.vms.dao.imp;
+
+import com.vms.config.HibernateUtil;
+import com.vms.dao.TruckDao;
+import com.vms.model.Truck;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
+
+
 public class TruckDaoImpl implements TruckDao {
 
     public void save(Truck truck){
@@ -8,6 +18,7 @@ public class TruckDaoImpl implements TruckDao {
             tx.commit();
         }
     }
+
 
     public Truck findById(Integer id){
         try(Session session=HibernateUtil.getSessionFactory().openSession()){

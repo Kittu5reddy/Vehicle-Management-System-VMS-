@@ -1,5 +1,13 @@
 package com.vms.dao.imp;
 
+import com.vms.config.HibernateUtil;
+import com.vms.dao.CarDao;
+import com.vms.model.Car;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.util.List;
+
 public class CarDaoImpl implements CarDao {
 
     public void save(Car car){

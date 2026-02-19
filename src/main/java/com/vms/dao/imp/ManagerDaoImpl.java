@@ -1,4 +1,4 @@
-package com.vms.dao.impl;
+package com.vms.dao.imp;
 
 import com.vms.config.HibernateUtil;
 import com.vms.dao.ManagerDao;
@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.util.List;
+
 
 public class ManagerDaoImpl implements ManagerDao {
 
