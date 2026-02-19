@@ -1,0 +1,34 @@
+@startuml VMS_VehicleState
+!theme plain
+title Vehicle Management System - Vehicle State Diagram
+
+[*] --> ACTIVE
+
+ACTIVE --> MAINTENANCE: Schedule maintenance
+MAINTENANCE --> ACTIVE: Maintenance complete
+ACTIVE --> INACTIVE: Deactivate vehicle
+ACTIVE --> RETIRED: Vehicle end of life
+INACTIVE --> ACTIVE: Reactivate vehicle
+RETIRED --> [*]
+
+note right of ACTIVE
+  Vehicle is available for trips
+  and can be assigned to drivers
+end note
+
+note right of MAINTENANCE
+  Vehicle is under service
+  not available for trips
+end note
+
+note right of INACTIVE
+  Vehicle is temporarily unavailable
+  but can be reactivated
+end note
+
+note right of RETIRED
+  Vehicle is permanently retired
+  from service
+end note
+
+@enduml

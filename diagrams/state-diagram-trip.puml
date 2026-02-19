@@ -1,0 +1,34 @@
+@startuml VMS_TripState
+!theme plain
+title Vehicle Management System - Trip State Diagram
+
+[*] --> SCHEDULED
+
+SCHEDULED --> IN_PROGRESS: Start trip
+IN_PROGRESS --> COMPLETED: Complete trip
+IN_PROGRESS --> CANCELLED: Trip cancelled
+SCHEDULED --> CANCELLED: Trip cancelled before start
+COMPLETED --> [*]
+CANCELLED --> [*]
+
+note right of SCHEDULED
+  Trip is scheduled and waiting
+  to start
+end note
+
+note right of IN_PROGRESS
+  Trip is currently active
+  driver is on route
+end note
+
+note right of COMPLETED
+  Trip has been completed
+  successfully
+end note
+
+note right of CANCELLED
+  Trip has been cancelled
+  for any reason
+end note
+
+@enduml

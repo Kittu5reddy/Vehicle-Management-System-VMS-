@@ -1,0 +1,112 @@
+@startuml VMS_ER_Diagram
+!theme plain
+title Vehicle Management System - Entity Relationship Diagram
+
+entity "users" as users {
+  *id : INT <<PK>>
+  --
+  userName : VARCHAR
+  role : ENUM
+  dateOfBirth : DATETIME
+  phoneNumber : VARCHAR
+  fullName : VARCHAR
+  email : VARCHAR
+  password : VARCHAR
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+entity "drivers" as drivers {
+  *id : INT <<PK>>
+  --
+  licenseNumber : VARCHAR
+  rating : FLOAT
+  experienceYears : INT
+  amountPerTrip : FLOAT
+  available : BOOLEAN
+  licenseExpiryDate : DATETIME
+  user_id : INT <<FK>>
+}
+
+entity "managers" as managers {
+  *id : INT <<PK>>
+  --
+  departmentName : VARCHAR
+  salary : DOUBLE
+  user_id : INT <<FK>>
+}
+
+entity "vehicles" as vehicles {
+  *id : INT <<PK>>
+  --
+  brandName : VARCHAR
+  model : VARCHAR
+  registrationNumber : VARCHAR
+  fuelType : ENUM
+  status : ENUM
+  purchaseDate : DATETIME
+  createdAt : DATETIME
+  updatedAt : DATETIME
+}
+
+entity "buses" as buses {
+  *id : INT <<PK>>
+  --
+  seatingCapacity : INT
+  standingCapacity : INT
+  busNumber : VARCHAR
+  vehicle_id : INT <<FK>>
+}
+
+entity "cars" as cars {
+  *id : INT <<PK>>
+  --
+  carType : VARCHAR
+  carNumber : VARCHAR
+  vehicle_id : INT <<FK>>
+}
+
+entity "trucks" as trucks {
+  *id : INT <<PK>>
+  --
+  truckType : ENUM
+  loadCapacity : FLOAT
+  truckNumber : VARCHAR
+  vehicle_id : INT <<FK>>
+}
+
+entity "trips" as trips {
+  *id : INT <<PK>>
+  --
+  vehicle_id : INT <<FK>>
+  driver_id : INT <<FK>>
+  startLocation : VARCHAR
+  endLocation : VARCHAR
+  startTime : DATETIME
+  endTime : DATETIME
+  distance : FLOAT
+  status : ENUM
+  createdAt : DATETIME
+}
+
+entity "maintenances" as maintenances {
+  *id : INT <<PK>>
+  --
+  vehicle_id : INT <<FK>>
+  serviceType : VARCHAR
+  description : VARCHAR
+  serviceDate : DATETIME
+  cost : DOUBLE
+  serviceCenter : VARCHAR
+}
+
+users ||--o{ drivers : "is"
+users ||--o{ managers : "is"
+vehicles ||--o{ buses : "is"
+vehicles ||--o{ cars : "is"
+vehicles ||--o{ trucks : "is"
+trips }o--|| vehicles : "uses"
+trips }o--|| drivers : "driven by"
+maintenances }o--|| vehicles : "performed on"
+
+@enduml

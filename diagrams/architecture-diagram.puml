@@ -1,0 +1,124 @@
+@startuml VMS_Architecture
+!theme plain
+title Vehicle Management System - Architecture Diagram
+
+package "UI Layer" {
+    component [LoginFrame]
+    component [MainFrame]
+    component [DashboardPanel]
+    component [DriverDashboardPanel]
+    component [VehiclesPanel]
+    component [DriversPanel]
+    component [TripsPanel]
+    component [MaintenancePanel]
+    component [ProfilePanel]
+    component [Sidebar]
+}
+
+package "Controller Layer" {
+    component [AuthController]
+    component [DashboardController]
+    component [VehicleController]
+    component [DriverController]
+    component [TripController]
+    component [MaintenanceController]
+}
+
+package "Service Layer" {
+    component [AuthService]
+    component [VehicleService]
+    component [DriverService]
+    component [TripService]
+    component [MaintenanceService]
+    component [BusService]
+    component [CarService]
+    component [TruckService]
+    component [ManagerService]
+}
+
+package "DAO Layer" {
+    component [VehicleDao]
+    component [DriverDao]
+    component [TripDao]
+    component [MaintenanceDao]
+    component [UserDao]
+    component [BusDao]
+    component [CarDao]
+    component [TruckDao]
+    component [ManagerDao]
+}
+
+package "Model Layer" {
+    component [Vehicle]
+    component [Driver]
+    component [Trip]
+    component [Maintenance]
+    component [User]
+    component [Bus]
+    component [Car]
+    component [Truck]
+    component [Manager]
+}
+
+package "Configuration & Utilities" {
+    component [HibernateUtil]
+    component [PasswordUtil]
+    component [AppSession]
+    component [Theme]
+}
+
+package "Database" {
+    database "MySQL DB"
+}
+
+' UI to Controller connections
+LoginFrame --> AuthController
+DashboardPanel --> DashboardController
+VehiclesPanel --> VehicleController
+DriversPanel --> DriverController
+TripsPanel --> TripController
+MaintenancePanel --> MaintenanceController
+
+' Controller to Service connections
+AuthController --> AuthService
+DashboardController --> VehicleService
+VehicleController --> VehicleService
+DriverController --> DriverService
+TripController --> TripService
+MaintenanceController --> MaintenanceService
+
+' Service to DAO connections
+VehicleService --> VehicleDao
+DriverService --> DriverDao
+TripService --> TripDao
+MaintenanceService --> MaintenanceDao
+AuthService --> UserDao
+BusService --> BusDao
+CarService --> CarDao
+TruckService --> TruckDao
+ManagerService --> ManagerDao
+
+' DAO to Model & Database connections
+VehicleDao --> Vehicle
+DriverDao --> Driver
+TripDao --> Trip
+MaintenanceDao --> Maintenance
+UserDao --> User
+BusDao --> Bus
+CarDao --> Car
+TruckDao --> Truck
+ManagerDao --> Manager
+
+Vehicle --> [MySQL DB]
+Driver --> [MySQL DB]
+Trip --> [MySQL DB]
+Maintenance --> [MySQL DB]
+User --> [MySQL DB]
+
+' Utility connections
+HibernateUtil .[hidden].> Vehicle
+PasswordUtil --> AuthService
+AppSession --> AuthController
+Theme --> MainFrame
+
+@enduml

@@ -1,0 +1,315 @@
+@startuml VMS_Detailed_Class_Diagram
+!theme plain
+title Vehicle Management System - Detailed Class Diagram (With Methods & Variables)
+
+package "Model Layer - User Hierarchy" {
+    abstract class User {
+        -- VARIABLES --
+        - id: Integer
+        - userName: String
+        - role: Role
+        - dateOfBirth: LocalDateTime
+        - phoneNumber: String
+        - fullName: String
+        - email: String
+        - gender: Gender
+        - password: String
+        - address: String
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        -- LIFECYCLE METHODS --
+        # onCreate(): void
+        # onUpdate(): void
+        -- GETTERS --
+        + getId(): Integer
+        + getUserName(): String
+        + getRole(): Role
+        + getDateOfBirth(): LocalDateTime
+        + getPhoneNumber(): String
+        + getFullName(): String
+        + getEmail(): String
+        + getGender(): Gender
+        + getPassword(): String
+        + getAddress(): String
+        + getCreatedAt(): LocalDateTime
+        + getUpdatedAt(): LocalDateTime
+        -- SETTERS --
+        + setId(id: Integer): void
+        + setUserName(userName: String): void
+        + setRole(role: Role): void
+        + setDateOfBirth(dateOfBirth: LocalDateTime): void
+        + setPhoneNumber(phoneNumber: String): void
+        + setFullName(fullName: String): void
+        + setEmail(email: String): void
+        + setGender(gender: Gender): void
+        + setPassword(password: String): void
+        + setAddress(address: String): void
+        + setCreatedAt(createdAt: LocalDateTime): void
+        + setUpdatedAt(updatedAt: LocalDateTime): void
+    }
+
+    class Driver {
+        -- VARIABLES --
+        - licenseNumber: String
+        - rating: Float
+        - experienceYears: Integer
+        - amountPerTrip: Float
+        - available: Boolean
+        - licenseExpiryDate: LocalDateTime
+        -- METHODS --
+        + toString(): String
+        -- GETTERS --
+        + getLicenseNumber(): String
+        + getRating(): Float
+        + getExperienceYears(): Integer
+        + getAmountPerTrip(): Float
+        + getAvailable(): Boolean
+        + getLicenseExpiryDate(): LocalDateTime
+        -- SETTERS --
+        + setLicenseNumber(licenseNumber: String): void
+        + setRating(rating: Float): void
+        + setExperienceYears(experienceYears: Integer): void
+        + setAmountPerTrip(amountPerTrip: Float): void
+        + setAvailable(available: Boolean): void
+        + setLicenseExpiryDate(licenseExpiryDate: LocalDateTime): void
+    }
+
+    class Manager {
+        -- VARIABLES --
+        - salary: Float
+        - experienceYears: Integer
+        - department: String
+        - joiningDate: LocalDateTime
+        -- GETTERS --
+        + getSalary(): Float
+        + getExperienceYears(): Integer
+        + getDepartment(): String
+        + getJoiningDate(): LocalDateTime
+        -- SETTERS --
+        + setSalary(salary: Float): void
+        + setExperienceYears(experienceYears: Integer): void
+        + setDepartment(department: String): void
+        + setJoiningDate(joiningDate: LocalDateTime): void
+    }
+
+    User <|-- Driver
+    User <|-- Manager
+}
+
+package "Model Layer - Vehicle Hierarchy" {
+    abstract class Vehicle {
+        -- VARIABLES --
+        - id: Integer
+        - brandName: String
+        - model: String
+        - registrationNumber: String
+        - fuelType: FuelType
+        - status: VehicleStatus
+        - purchaseDate: LocalDateTime
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        -- LIFECYCLE METHODS --
+        # onCreate(): void
+        # onUpdate(): void
+        -- GETTERS --
+        + getId(): Integer
+        + getBrandName(): String
+        + getModel(): String
+        + getRegistrationNumber(): String
+        + getFuelType(): FuelType
+        + getStatus(): VehicleStatus
+        + getPurchaseDate(): LocalDateTime
+        + getCreatedAt(): LocalDateTime
+        + getUpdatedAt(): LocalDateTime
+        -- SETTERS --
+        + setId(id: Integer): void
+        + setBrandName(brandName: String): void
+        + setModel(model: String): void
+        + setRegistrationNumber(registrationNumber: String): void
+        + setFuelType(fuelType: FuelType): void
+        + setStatus(status: VehicleStatus): void
+        + setPurchaseDate(purchaseDate: LocalDateTime): void
+        + setCreatedAt(createdAt: LocalDateTime): void
+        + setUpdatedAt(updatedAt: LocalDateTime): void
+    }
+
+    class Bus {
+        -- VARIABLES --
+        - seatingCapacity: Integer
+        - standingCapacity: Integer
+        - busNumber: String
+        -- METHODS --
+        + toString(): String
+        -- GETTERS --
+        + getSeatingCapacity(): Integer
+        + getStandingCapacity(): Integer
+        + getBusNumber(): String
+        -- SETTERS --
+        + setSeatingCapacity(seatingCapacity: Integer): void
+        + setStandingCapacity(standingCapacity: Integer): void
+        + setBusNumber(busNumber: String): void
+    }
+
+    class Car {
+        -- VARIABLES --
+        - numberOfDoors: Integer
+        - bootSpace: Float
+        - hasAC: Boolean
+        -- METHODS --
+        + toString(): String
+        -- GETTERS --
+        + getNumberOfDoors(): Integer
+        + getBootSpace(): Float
+        + getHasAC(): Boolean
+        -- SETTERS --
+        + setNumberOfDoors(numberOfDoors: Integer): void
+        + setBootSpace(bootSpace: Float): void
+        + setHasAC(hasAC: Boolean): void
+    }
+
+    class Truck {
+        -- VARIABLES --
+        - loadCapacity: Float
+        - numberOfAxles: Integer
+        - truckType: TruckType
+        -- CONSTRUCTOR --
+        + Truck()
+        -- METHODS --
+        + toString(): String
+        -- GETTERS --
+        + getLoadCapacity(): Float
+        + getNumberOfAxles(): Integer
+        + getTruckType(): TruckType
+        -- SETTERS --
+        + setLoadCapacity(loadCapacity: Float): void
+        + setNumberOfAxles(numberOfAxles: Integer): void
+        + setTruckType(truckType: TruckType): void
+    }
+
+    Vehicle <|-- Bus
+    Vehicle <|-- Car
+    Vehicle <|-- Truck
+}
+
+package "Model Layer - Transactions" {
+    class Trip {
+        -- VARIABLES --
+        - id: Integer
+        - vehicle: Vehicle
+        - driver: Driver
+        - startLocation: String
+        - endLocation: String
+        - startTime: LocalDateTime
+        - endTime: LocalDateTime
+        - distance: Float
+        - status: TripStatus
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        -- GETTERS --
+        + getId(): Integer
+        + getVehicle(): Vehicle
+        + getDriver(): Driver
+        + getStartLocation(): String
+        + getEndLocation(): String
+        + getStartTime(): LocalDateTime
+        + getEndTime(): LocalDateTime
+        + getDistance(): Float
+        + getStatus(): TripStatus
+        + getCreatedAt(): LocalDateTime
+        + getUpdatedAt(): LocalDateTime
+        -- SETTERS --
+        + setId(id: Integer): void
+        + setVehicle(vehicle: Vehicle): void
+        + setDriver(driver: Driver): void
+        + setStartLocation(startLocation: String): void
+        + setEndLocation(endLocation: String): void
+        + setStartTime(startTime: LocalDateTime): void
+        + setEndTime(endTime: LocalDateTime): void
+        + setDistance(distance: Float): void
+        + setStatus(status: TripStatus): void
+        + setCreatedAt(createdAt: LocalDateTime): void
+        + setUpdatedAt(updatedAt: LocalDateTime): void
+    }
+
+    class Maintenance {
+        -- VARIABLES --
+        - id: Integer
+        - vehicle: Vehicle
+        - serviceType: String
+        - description: String
+        - serviceDate: LocalDateTime
+        - cost: Double
+        - serviceCenter: String
+        -- GETTERS --
+        + getId(): Integer
+        + getVehicle(): Vehicle
+        + getServiceType(): String
+        + getDescription(): String
+        + getServiceDate(): LocalDateTime
+        + getCost(): Double
+        + getServiceCenter(): String
+        -- SETTERS --
+        + setId(id: Integer): void
+        + setVehicle(vehicle: Vehicle): void
+        + setServiceType(serviceType: String): void
+        + setDescription(description: String): void
+        + setServiceDate(serviceDate: LocalDateTime): void
+        + setCost(cost: Double): void
+        + setServiceCenter(serviceCenter: String): void
+    }
+
+    Trip --> Vehicle
+    Trip --> Driver
+    Maintenance --> Vehicle
+}
+
+package "Enums" {
+    enum Role {
+        MANAGER
+        DRIVER
+        ADMIN
+    }
+
+    enum Gender {
+        MALE
+        FEMALE
+        OTHER
+    }
+
+    enum FuelType {
+        PETROL
+        DIESEL
+        HYBRID
+        ELECTRIC
+    }
+
+    enum VehicleStatus {
+        ACTIVE
+        INACTIVE
+        MAINTENANCE
+        RETIRED
+    }
+
+    enum TripStatus {
+        SCHEDULED
+        IN_PROGRESS
+        COMPLETED
+        CANCELLED
+    }
+
+    enum TruckType {
+        FLATBED
+        BOX
+        TANKER
+        CONTAINER
+    }
+
+    User --> Role
+    User --> Gender
+    Vehicle --> FuelType
+    Vehicle --> VehicleStatus
+    Trip --> TripStatus
+    Truck --> TruckType
+}
+
+@enduml

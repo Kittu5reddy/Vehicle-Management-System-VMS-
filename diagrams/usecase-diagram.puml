@@ -1,0 +1,53 @@
+@startuml VMS_UseCase
+!theme plain
+title Vehicle Management System - Use Case Diagram
+
+left to right direction
+
+actor "Manager" as manager
+actor "Driver" as driver
+actor "Admin" as admin
+
+rectangle "Vehicle Management System" {
+    usecase "Login" as login
+    usecase "View Dashboard" as viewDash
+    usecase "Manage Vehicles" as manageVehicles
+    usecase "Manage Drivers" as manageDrivers
+    usecase "Create Trip" as createTrip
+    usecase "View My Trips" as viewTrips
+    usecase "Schedule Maintenance" as scheduleMaint
+    usecase "View Maintenance History" as viewMaint
+    usecase "Generate Reports" as genReports
+    usecase "Manage User Profile" as manageProfile
+    usecase "Manage Assignments" as manageAssign
+    usecase "Update Trip Status" as updateTripStatus
+}
+
+manager --> login
+driver --> login
+admin --> login
+
+login --> viewDash
+
+manager --> manageVehicles
+manager --> manageDrivers
+manager --> scheduleMaint
+manager --> genReports
+manager --> manageAssign
+
+driver --> createTrip
+driver --> viewTrips
+driver --> updateTripStatus
+driver --> viewMaint
+driver --> manageProfile
+
+admin --> manageVehicles
+admin --> manageDrivers
+admin --> manageAssign
+admin --> genReports
+admin --> manageProfile
+
+viewDash --> viewTrips
+viewDash --> viewMaint
+
+@enduml

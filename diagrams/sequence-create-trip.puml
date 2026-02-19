@@ -1,0 +1,72 @@
+@startuml VMS_CreateTrip_Sequence
+!theme plain
+title Vehicle Management System - Create Trip Sequence Diagram
+
+actor Driver
+participant TripsPanel
+participant TripController
+participant TripService
+participant VehicleService
+participant TripDao
+participant VehicleDao
+database Database
+
+Driver -> TripsPanel: Fill trip details (vehicle, startLocation, endLocation)
+activate TripsPanel
+
+TripsPanel -> TripController: createTrip(tripDTO)
+activate TripController
+
+TripController -> VehicleService: validateVehicle(vehicleId)
+activate VehicleService
+
+VehicleService -> VehicleDao: findById(vehicleId)
+activate VehicleDao
+
+VehicleDao -> Database: SELECT * FROM vehicles WHERE id = ?
+activate Database
+Database --> VehicleDao: Vehicle record
+deactivate Database
+
+VehicleDao --> VehicleService: Vehicle object
+deactivate VehicleDao
+
+alt Vehicle Found & Active
+    VehicleService --> TripController: Vehicle validation passed
+else Vehicle Not Found or Inactive
+    VehicleService --> TripController: VehicleNotFoundException
+    TripController --> TripsPanel: Error message
+end
+
+deactivate VehicleService
+
+TripController -> TripService: createTrip(tripDTO, vehicleId, driverId)
+activate TripService
+
+TripService -> TripService: buildTripObject(tripDTO)
+activate TripService
+TripService --> TripService: Trip object created
+deactivate TripService
+
+TripService -> TripDao: save(trip)
+activate TripDao
+
+TripDao -> Database: INSERT INTO trips VALUES (...)
+activate Database
+Database --> TripDao: Success
+deactivate Database
+
+TripDao --> TripService: Saved Trip with generated ID
+deactivate TripDao
+
+TripService --> TripController: Trip (with ID)
+deactivate TripService
+
+TripController --> TripsPanel: TripResult.SUCCESS
+deactivate TripController
+
+TripsPanel -> TripsPanel: refreshTripsList()
+TripsPanel -> Driver: Display success message + Trip ID
+deactivate TripsPanel
+
+@enduml

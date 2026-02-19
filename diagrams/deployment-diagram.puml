@@ -1,0 +1,44 @@
+@startuml VMS_Deployment
+!theme plain
+title Vehicle Management System - Deployment Diagram
+
+package "Client Machine" {
+    node "Desktop Application" as Desktop {
+        component [JVM Runtime]
+        component [VMS Swing Application]
+    }
+}
+
+package "Server Environment" {
+    node "Database Server" as DBServer {
+        database "MySQL Database" {
+            folder "Schema" {
+                storage [users]
+                storage [vehicles]
+                storage [drivers]
+                storage [trips]
+                storage [maintenance]
+                storage [buses]
+                storage [cars]
+                storage [trucks]
+                storage [managers]
+            }
+        }
+    }
+    
+    node "Application Server" as AppServer {
+        component [Application Process] {
+            artifact "VMS.jar"
+        }
+    }
+}
+
+Desktop --> AppServer: HTTP/Network
+AppServer --> DBServer: JDBC Connection
+DBServer --> [users]
+DBServer --> [vehicles]
+DBServer --> [drivers]
+DBServer --> [trips]
+DBServer --> [maintenance]
+
+@enduml

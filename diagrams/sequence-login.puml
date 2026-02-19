@@ -1,0 +1,53 @@
+@startuml VMS_Login_Sequence
+!theme plain
+title Vehicle Management System - Login Sequence Diagram
+
+actor User
+participant LoginFrame
+participant AuthController
+participant AuthService
+participant UserDao
+database Database
+
+User -> LoginFrame: Enter credentials
+activate LoginFrame
+
+LoginFrame -> AuthController: authenticate(userName, password)
+activate AuthController
+
+AuthController -> AuthService: validateUser(userName, password)
+activate AuthService
+
+AuthService -> UserDao: findByUserName(userName)
+activate UserDao
+
+UserDao -> Database: SELECT * FROM users WHERE userName = ?
+activate Database
+Database --> UserDao: User record
+deactivate Database
+
+UserDao --> AuthService: User object
+deactivate UserDao
+
+AuthService -> AuthService: validatePassword(inputPassword, storedPassword)
+activate AuthService
+AuthService --> AuthService: Password match result
+deactivate AuthService
+
+AuthService --> AuthController: AuthResult (success/failure)
+deactivate AuthService
+
+alt Authentication Success
+    AuthController -> AuthController: createSession(user)
+    AuthController --> LoginFrame: AuthResult.SUCCESS
+    LoginFrame -> LoginFrame: showMainFrame()
+    LoginFrame -> User: Navigate to Dashboard
+else Authentication Failed
+    AuthController --> LoginFrame: AuthResult.INVALID_CREDENTIALS
+    LoginFrame -> User: Show error message
+end
+
+deactivate AuthController
+deactivate LoginFrame
+
+@enduml
