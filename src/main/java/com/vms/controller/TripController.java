@@ -24,11 +24,11 @@ public class TripController {
     private final TripService tripService;
     private final DriverService driverService;
     private final VehicleService vehicleService;
+    private final DashboardController dashboardController;
 
-    public TripController(TripsPanel view) {
-
+    public TripController(TripsPanel view,DashboardController dashboardController) {
+        this.dashboardController=dashboardController;
         this.view = view;
-
         this.tripService = new TripServiceImpl();
         this.driverService = new DriverServiceImpl();
         this.vehicleService = new VehicleServiceImpl();
@@ -117,7 +117,7 @@ public class TripController {
             }
 
             loadTrips();
-
+            dashboardController.loadDashboardData();
         } catch (Exception ex) {
 
             ex.printStackTrace();
@@ -139,6 +139,7 @@ public class TripController {
 
         tripService.deleteTrip(id);
         loadTrips();
+        dashboardController.loadDashboardData();
     }
 
     // ======================================

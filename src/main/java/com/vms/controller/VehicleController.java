@@ -17,8 +17,9 @@ public class VehicleController {
 
     private final VehicleService vehicleService;
     private final VehiclesPanel view;
-
-    public VehicleController(VehiclesPanel view) {
+    private final DashboardController dashboardController;
+    public VehicleController(VehiclesPanel view,DashboardController dashboardController) {
+        this.dashboardController=dashboardController;
         this.view = view;
         this.vehicleService = new VehicleServiceImpl();
     }
@@ -67,6 +68,7 @@ public class VehicleController {
         vehicleService.updateVehicle(v);
 
         loadVehicles();
+
     }
 
     // =============================
@@ -93,6 +95,7 @@ public class VehicleController {
         vehicleService.saveVehicle(vehicle);
 
         loadVehicles(); // refresh table
+        dashboardController.loadDashboardData();
     }
 
     // =============================
@@ -111,6 +114,7 @@ public class VehicleController {
 
         vehicleService.updateVehicle(vehicle);
         loadVehicles();
+        dashboardController.loadDashboardData();
     }
     public Vehicle getVehicleById(Integer id){
         return vehicleService.getVehicleById(id);
@@ -161,6 +165,7 @@ public class VehicleController {
         vehicleService.saveVehicle(v);
 
         loadVehicles();
+        dashboardController.loadDashboardData();
     }
     public void updateVehicleWithType(
             Integer id,
@@ -223,6 +228,7 @@ public class VehicleController {
         vehicleService.updateVehicle(v);
 
         loadVehicles();
+        dashboardController.loadDashboardData();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.vms.ui;
 
+import com.vms.controller.DashboardController;
 import com.vms.controller.VehicleController;
 import com.vms.model.Bus;
 import com.vms.model.Car;
@@ -18,8 +19,11 @@ public class VehiclesPanel extends JPanel {
     private VehicleController controller;
 
     public VehiclesPanel() {
+        DashboardPanel dashboardPanel = new DashboardPanel();
+        DashboardController dashboardController =
+                new DashboardController(dashboardPanel);
 
-        controller = new VehicleController(this);
+        controller = new VehicleController(this,dashboardController);
 
         setLayout(new BorderLayout());
         setBackground(Theme.CARD_BG);

@@ -11,7 +11,7 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private Sidebar sidebar;
-
+    private DashboardController dashboardController;
     public static final String CARD_LOGIN = "LOGIN";
     public static final String CARD_DASHBOARD = "DASHBOARD";
     public static final String CARD_VEHICLES = "VEHICLES";
@@ -47,10 +47,10 @@ public class MainFrame extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         mainPanel.setBackground(Theme.CARD_BG);
-
+        DashboardPanel dashboardPanel=new DashboardPanel();
         // 🔥 Create controller HERE
         authController = new AuthController(this);
-
+        dashboardController = new DashboardController(dashboardPanel);
         // Panels
         LoginFrame login = new LoginFrame(authController);
 
@@ -68,6 +68,7 @@ public class MainFrame extends JFrame {
                 new DashboardController(dashboard);
 
         controller.loadDashboardData();
+        dashboardController.loadDashboardData();
 
         mainPanel.add(login, CARD_LOGIN);
         mainPanel.add(dashboard, CARD_DASHBOARD);

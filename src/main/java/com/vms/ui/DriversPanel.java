@@ -1,5 +1,6 @@
 package com.vms.ui;
 
+import com.vms.controller.DashboardController;
 import com.vms.controller.DriverController;
 import com.vms.enums.Gender;
 import com.vms.model.Driver;
@@ -18,8 +19,9 @@ public class DriversPanel extends JPanel {
     private JTable table;
 
     public DriversPanel() {
-
-        controller = new DriverController(this);
+        DashboardPanel dashboardPanel = new DashboardPanel();
+        DashboardController dashboardController =new DashboardController(dashboardPanel);
+        controller = new DriverController(this,dashboardController);
 
         setLayout(new BorderLayout());
         setBackground(Theme.CARD_BG);

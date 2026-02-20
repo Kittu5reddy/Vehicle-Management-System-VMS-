@@ -1,5 +1,6 @@
 package com.vms.ui;
 
+import com.vms.controller.DashboardController;
 import com.vms.controller.MaintenanceController;
 import com.vms.model.Maintenance;
 import com.vms.model.Vehicle;
@@ -18,8 +19,11 @@ public class MaintenancePanel extends JPanel {
     private MaintenanceController controller;
 
     public MaintenancePanel(){
+        DashboardPanel dashboardPanel = new DashboardPanel();
+        DashboardController dashboardController =
+                new DashboardController(dashboardPanel);
 
-        controller = new MaintenanceController(this);
+        controller = new MaintenanceController(this,dashboardController);
 
         setLayout(new BorderLayout());
 

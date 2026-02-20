@@ -17,14 +17,14 @@ import java.util.List;
 public class MaintenanceController {
 
     private MaintenancePanel view;
-
+    private DashboardController dashboardController;
     private MaintenanceService maintenanceService;
     private VehicleService vehicleService;
 
-    public MaintenanceController(MaintenancePanel view){
+    public MaintenanceController(MaintenancePanel view,DashboardController dashboardController){
 
         this.view = view;
-
+        this.dashboardController = dashboardController;
         maintenanceService = new MaintenanceServiceImpl();
         vehicleService = new VehicleServiceImpl();
     }
@@ -75,6 +75,7 @@ public class MaintenanceController {
         maintenanceService.saveMaintenance(m);
 
         loadMaintenances();
+        dashboardController.loadDashboardData();
     }
 
     // ================= UPDATE =================
@@ -108,6 +109,7 @@ public class MaintenanceController {
         maintenanceService.updateMaintenance(m);
 
         loadMaintenances();
+        dashboardController.loadDashboardData();
     }
 
     // ================= GET VEHICLES =================

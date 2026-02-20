@@ -1,5 +1,6 @@
 package com.vms.ui;
 
+import com.vms.controller.DashboardController;
 import com.vms.controller.TripController;
 import com.vms.enums.TripStatus;
 import com.vms.model.Driver;
@@ -21,8 +22,11 @@ public class TripsPanel extends JPanel {
     private TripController controller;
 
     public TripsPanel() {
+        DashboardPanel dashboardPanel = new DashboardPanel();
+        DashboardController dashboardController =
+                new DashboardController(dashboardPanel);
 
-        controller = new TripController(this);
+        controller = new TripController(this,dashboardController);
 
         setLayout(new BorderLayout());
         setBackground(Theme.CARD_BG);

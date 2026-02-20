@@ -19,11 +19,14 @@ public class DriverController {
     private final DriversPanel view;
     private final DriverService driverService;
 
-    public DriverController(DriversPanel view) {
+    private final DashboardController dashboardController;
+
+    public DriverController(DriversPanel view,
+                            DashboardController dashboardController) {
         this.view = view;
         this.driverService = new DriverServiceImpl();
+        this.dashboardController = dashboardController;
     }
-
     // ==================================
     // LOAD DRIVERS
     // ==================================
@@ -91,7 +94,7 @@ public class DriverController {
             driverService.saveDriver(driver);
 
             loadDrivers();
-
+            dashboardController.loadDashboardData();
         } catch (Exception ex) {
 
             ex.printStackTrace();
@@ -160,6 +163,8 @@ public class DriverController {
             driverService.updateDriver(driver);
 
             loadDrivers();
+            AbstractButton addDriverButton;
+            dashboardController.loadDashboardData();
 
         }
         catch(Exception ex){
@@ -183,6 +188,8 @@ public class DriverController {
     public void deleteDriver(Integer id){
         driverService.deleteDriver(id);
         loadDrivers();
+        loadDrivers();
+        dashboardController.loadDashboardData();
     }
 
     public Driver getDriverById(Integer id){
